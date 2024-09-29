@@ -117,7 +117,7 @@ LinkedListNode<T> *LinkedList<T>::insertAfter(LinkedListNode<T> *node, T value){
     if(node == nullptr || _head == nullptr){
         //deallocate dynamically allocated insertNode because we will not use it.
         delete insertNode; 
-        return LinkedList<T>::prepend(value);  //call append method without creating instance of class
+        return LinkedList<T>::prepend(value);  //call prepend method without creating instance of class
         //append method will handle when the list is empty
     }
     else{

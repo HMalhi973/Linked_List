@@ -47,6 +47,5 @@ Stack<T>::Stack(const std::vector<T> &items){
 }
 
 
-// TODO: Implement all other methods defined in Stack.hpp here
 
 #endif

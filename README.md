@@ -1,160 +1,51 @@
-# Homework 1
+# Linked List Implementation and Stack and Queue APIs
 
-> Due: October 22th, 2023 11:59 PM
+This project implments a singly linked linked list in C++ which is then in turn used to implement both Queue and Stack APIs. The learning objective of this work is to showcase how simple yet powerful data structures can be abstracted and built upon each other to create more complex structures. This prject was completed for ECS 36C at UC Davis
 
-**Topics**: Templates, Linked Lists, Stacks, Queues
+## Linked List Implementation Details
 
-## Table of Contents
+The `LinkedList` class is a template class that can be instantiated to form a singly linked list which manages a collection of `LinkedListNode` objects. Each one of these objects contains a variable that holds the value of the node and a pointer to another LinkedListNode object. LinkedList class allows for a decent amount of functionality with the following methods:
 
-- [Homework 1](#homework-1)
-  - [Table of Contents](#table-of-contents)
-  - [Homework Spec](#homework-spec)
-    - [Grading](#grading)
-    - [Linked List](#linked-list)
-    - [Stack](#stack)
-    - [Queue](#queue)
-    - [Memory Safety](#memory-safety)
-    - [Submission](#submission)
-  - [Setup](#setup)
-    - [Option 1: VS Code with Local Dev Container](#option-1-vs-code-with-local-dev-container)
-    - [Option 2: VS Code with Remote Dev](#option-2-vs-code-with-remote-dev)
-    - [Option 3: Terminal](#option-3-terminal)
-  - [Run/Debug](#rundebug)
-    - [Run tests using VS Code](#run-tests-using-vs-code)
-    - [Run tests using Terminal](#run-tests-using-terminal)
+- Insertion:
+  - `prepend` inserts a new node at the beggining of the list.
+  - `append` inserts a new node at the end of the list.
+  - `insertAfter` inserts the new node after the specified node passed in as an argument.
+- Deletion:
+  - `removeHead` removes the head node of the list.
+  - `remove` removes the first node encountered with the value .specified
+  - `clear` removes all nodes from the list.
+- Other functions:
+  - `find` searches for a node containing the specified value.
+  - `size`, `head`, `tail` are getters that return number of nodes, which is the head node, and which is the tail node.
+  - There also exists a move constructor, copy constructor, and a     constructor that takes in a vector.
 
-> ⚠️ DO NOT change files marked with
->
-> ```cpp
-> // DO NOT CHANGE THIS FILE
-> ```
+## Stack Implementation Details
+The `Stack` class is a blueprint for creating LIFO(Last In First Out) data structure leveraging `LinkedList` to carry out its function. Its key methods are the following:
+- `push` adds an item to the top of the stack.
+- `pop` removes and returns the item that was at the top of the stack.
+- `top` does the same as pop but doesn't remove the element.
+- `size` is a getter method that returns number of elements.
+- There also exists a constructor that will take a vector and place elements sequentially until the last element sits at the top.
 
-## Homework Spec
+## Queue Implementation Details
+The `Queue` class leverages `LinkedList` class as well but it provides a FIFO (First In First Out Data Structure). It has useful capabilities such as the following methods:
+- `enqueue` adds an item to the end of the queue.
+- `dequeue` removes the item at the front of the queue.
+- `size` is a getter method that returns number of elements in queue.
+- A contructor that takes in a vector also exists as well as a move constructor.
 
-In this homework, you will write a template library that contains three data
-structures - `LinkedList`, `Stack`, and `Queue`.
+## Building and Running the Project
 
-You will implement `LinkedList` first and then implement `Stack` and `Queue`
-using the `LinkedList` you implemented.
-
-> In reality, `Stack` and `Queue` can also be implemented using a
-> dynamically-sized array (such as `std::vector`), but not in this homework.
-
-### Grading
-
-You will all be graded only on the same (hidden) test cases your TAs created.
-
-We provided some test cases in [./tests](./tests). Feel free to modify and add
-more test cases, but the [./tests](./tests) in your submission will not be
-graded. However, you will be able to see the results of your submitted test
-cases on Gradescope.
-
-- `LinkedList` Implementation - 60%
-- `Stack` Implementation - 15%
-- `Queue` Implementation - 15%
-- Memory Safety - 10%
-
-> **NOTE:** If you are running out of time to implement all methods, please at
-> least provide a syntactically valid empty method definition for each method in
-> `lib/*.cpp` to make autograders' test cases compile.
-
-### Linked List
-
-- Check the definition for `LinkedListNode` in
-  [lib/LinkedListNode.hpp](lib/LinkedListNode.hpp).
-
-- Check the spec in [lib/LinkedList.hpp](lib/LinkedList.hpp) and implement all
-  methods in [lib/LinkedList.cpp](lib/LinkedList.cpp).
-
-- Create test cases in [tests/LinkedListTest.cpp](tests/LinkedListTest.cpp).
-
-### Stack
-
-- Check the spec in [lib/Stack.hpp](lib/Stack.hpp) and implement all methods in
-  [lib/Stack.cpp](lib/Stack.cpp).
-
-- Create test cases in [tests/StackTest.cpp](tests/StackTest.cpp).
-
-### Queue
-
-- Check the spec in [lib/Queue.hpp](lib/Queue.hpp) and implement all methods in
-  [lib/Queue.cpp](lib/Queue.cpp).
-
-- Create test cases in [tests/QueueTest.cpp](tests/QueueTest.cpp).
-
-### Memory Safety
-
-We will run `valgrind --leak-check=full ./build/run_tests` against the hidden
-test cases to check whether there is any memory safety issue.
-
-If your test cases are not comprehensive, `valgrind` may not be able to report
-potential memory safety issues when you run against your test cases.
-
-If you do not fully implement the data structures, your score for memory safety
-will be automatically discounted even if `valgrind` does not report error(s).
-
-(For example, if you implement nothing, there will of course be no memory safety
-issues, but you will receive a 0 on memory safety score).
-
-### Submission
-
-Use `./generate_submission.sh` and submit `hw1-submission.zip` on Gradescope.
-
-## Setup
-
-Use one of the following options to set up your environment.
-
-> ⚠️ If you're a student, **DO NOT FORK** this repository because you cannot
-> change the visibility of a forked repo to private. If you plan to use Git for
-> version control (which is encouraged), run `rm -rf .git && git init` after
-> setting up using one of the options below and push to your **private**
-> repository. Any public repository containing part of this homework solution
-> will be reported to SJA.
-
-### Option 1: VS Code with Local Dev Container
-
-- If Docker is not running, start Docker.
-
-- Click the following button to set up the environment.
-
-  [![Setup Local Dev Container](https://img.shields.io/static/v1?label=Local%20Dev%20Container&message=Setup&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/ecs36c-fq2023/hw1)
-
-- When asked for selecting a Kit to configure CMake, choose **GCC**.
-
-### Option 2: VS Code with Remote Dev
-
-- Connect VS Code to the remote host.
-
-- Install **C/C++ Extension Pack** on Remote Server (if not already).
-
-- Run the following command inside the integrated terminal.
-
-  `git clone https://github.com/ecs36c-fq2023/hw1 ecs36c-hw1`
-
-- Run `code ./ecs36c-hw1` to open the folder.
-
-- When prompted to configure CMake, confirm and choose **GCC** when prompted for
-  kit selection.
-
-### Option 3: Terminal
-
-- Run the following commands
+- Run the following commands to build
 
   ```bash
-  git clone https://github.com/ecs36c-fq2023/hw1 ecs36c-hw1
-  cd ./ecs36c-hw1
+  cd ./Linked_List
   mkdir build
   cd build
   cmake ..
   ```
 
-## Run/Debug
-
-### Run tests using VS Code
-
-Directly Launch.
-
-### Run tests using Terminal
+- Run the following to run test cases and verify functionality
 
 ```bash
 cd build
